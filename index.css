@@ -1,0 +1,48 @@
+*{
+  font-family: 'Helvetica', Arial, sans-serif;
+  font-weight: normal;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding: 1px;
+  margin: 1px;
+}
+.numbers {
+  /*position: relative;*/
+  word-wrap: normal;
+  max-width: 1.5%;
+  min-width: 1.5%;
+  background: lightgray;; /* фон для цифр (может быть как простой цветовой фон, так и красивая иконка) */
+  padding: 2px;
+  margin: 0px;
+  border-right: 1px solid gray;
+}
+.max_prg {
+  position: relative;
+}
+.max_exp {
+  position: relative;
+}
+.add_info {
+  width: 100%;
+  margin-left: 2px;
+  padding: 2px;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  background-color:blanchedalmond;
+}
+
+.info:hover {
+  background: lightgray; /* Цвет фона под ссылкой */  
+ } 
+
+ li {
+  list-style-type: none; /* Убираем маркеры */
+ }
+ ul {
+  margin-left: 0; /* Отступ слева в браузере IE и Opera */
+  padding-left: 0; /* Отступ слева в браузере Firefox, Safari, Chrome */
+ }
