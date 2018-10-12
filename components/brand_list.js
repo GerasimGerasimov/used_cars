@@ -15,6 +15,14 @@ Vue.component('brand-list', {
         console.log('brand-list->getModels:', this.selectedBrand);
       }
     },
+    computed: {
+      //если не выбран брэнд то див-блок с моделями скрыт
+      seen: function (){
+        var res = (this.selectedBrand == '')? false: true;
+        console.log('brand-list->seen:',this.selectedBrand,':',res);
+        return res;  
+      }
+    },    
     template: `
       <div>
         <select v-model="selected" v-on:change="getModels">
@@ -22,22 +30,12 @@ Vue.component('brand-list', {
             {{ brand }}
           </option>
         </select>
-        <models-list v-bind:selectedBrand = "selectedBrand" >  </models-list>
+        <models-list v-show = "seen" v-bind:selectedBrand = "selectedBrand" >  </models-list>
       </div>
     `
   })
   
   /*
-      computed: {
-      //если не выбран брэнд то див-блок с моделями скрыт
-      seen: function (){
-        var res = (this.selectedBrand == '')? false: true;
-        console.log('brand-list->seen:',this.selectedBrand,':',res);
-        return res;  
-      }
-    },
-  v-if = "seen"
-  
         <span>Выбрано: {{ selected }}</span>
         <ul>
           <li v-for="(model, index) in models">

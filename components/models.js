@@ -37,6 +37,14 @@ Vue.component('models-list', {
             })
       }
     },
+    computed: {
+      //если не выбрана модель, то все зависимые блоки скрыты
+      seen: function (){
+        var res = (this.selectedBrand == '')? false: true;
+        console.log('models-list->seen:',this.selectedBrand,':',res);
+        return res;  
+      }
+    },
     template: `
       <div>
         <select v-model="selected">
@@ -44,6 +52,10 @@ Vue.component('models-list', {
             {{ model }}
           </option>
         </select>
+        <years-selector></years-selector>
+        <engine-selector></engine-selector>
+        <transmission-selector></transmission-selector>
+ 
       </div>
     `
   })
