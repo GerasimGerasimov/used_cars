@@ -6,7 +6,8 @@ Vue.component('models-list', {
     data: function () {
       return {
         models: ['Select a model...'], //существующие модели этого брэнда
-        selected:'Select a model...'   //выбранная модель
+        selected:'Select a model...',   //выбранная модель
+        mileage:''//пробег
       }
     },
     watch: {
@@ -55,7 +56,9 @@ Vue.component('models-list', {
         <years-selector></years-selector>
         <engine-selector></engine-selector>
         <transmission-selector></transmission-selector>
- 
+        <label>Пробег</label>
+        <input type="text" v-model="mileage"></br>
+        <button>Submit</button>
       </div>
     `
   })
