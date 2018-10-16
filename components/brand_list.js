@@ -47,7 +47,7 @@ Vue.component('brand-list', {
             {{ brand }}
           </option>
         </select>
-        <models-list v-show = "seen" v-bind:selectedBrand = "selectedBrand" >  </models-list>
+        <models-list v-show = "seen" v-bind:selectedBrand = "selectedBrand">  </models-list>
       </div>
     `
   })

@@ -1,31 +1,30 @@
-//выбор диапазона эксплуатации
-Vue.component('years-selector', {
+//выбор года появления модели
+Vue.component('year-selector', {
+    props: {
+      years:{//года выпуска
+        type: Array,
+        default: function(){
+          return []
+        }
+      }
+    },
     data: function () {
       return {
-        //yearsFromTo будет формироваться динамически от года появления модели
-        //            ДО текущего года
-        yearsFromTo: ['2010','2011','2012','2013','2014','2015','2016','2017','2018'], //года в диапазоне ОТ ДО
-        selectedYearFrom:'',//выбранный год ОТ
-        selectedYearTo:''//выбранный год ДО
+        selectedYear:'',//выбранный год ОТ
       }
     },
     methods: {
-      getValidYears: function () {
-        console.log('years-selectort->getValidYears: FROM:%s TO:%s', this.selectedYearFrom, this.selectedYearTo);
+      onChange: function () {
+        console.log('years-selectort->getSelectYear: FROM:%s', this.selectedYear);
+        var value = this.selectedYear;
+        this.$emit('select-year', value);
       }
     },   
     template: `
-      <div>
-        <select v-model="selectedYearFrom">
-            <option v-for="year in yearsFromTo">
+        <select v-model="selectedYear" v-on:change="onChange">
+            <option v-for="year in years">
                 {{ year }}
             </option>
         </select>
-        <select v-model="selectedYearTo">
-            <option v-for="year in yearsFromTo">
-                {{ year }}
-            </option>
-        </select>
-      </div>
     `
   })
