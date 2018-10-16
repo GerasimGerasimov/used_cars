@@ -10,15 +10,17 @@ var app = new Vue({
   `
 })
 
-/*
+/* 17.10.2018
   /data/get_brands
         * /data/get_models_for=brandname
-        * /data/get_years_for/<brandname>&<modelname>
-        * /data/get_engines_for/<brandname>&<modelname>&<year>
-        * /data/get_gearboxes_for/<brandname>&<modelname>&<year>&<engine>
+        * /data/get_years_for=<brandname>&<modelname>
+        * /data/get_engines_for=<brandname>&<modelname>&<year>
+        * /data/get_gearboxes_for=<brandname>&<modelname>&<year>&<engine>
+        * 
+  https://uscar.ga//search?brand=Brilliance&model=M2 (BS4) I&year=2009&kmage=1000&engine=1.8 л&gearbox=механика
 */
 
-/*
+/* 15.10.2018
 * /data/get_brands
         * /data/get_models_for/<brandname>
         * /data/get_years_for/<brandname>&<modelname>

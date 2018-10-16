@@ -13,7 +13,7 @@ Vue.component('models-list', {
         selectedEngine:'',//выбранный двигатель
         gearboxes:[],//типы трансмиссий
         selectedGearBox:'',//выбранная трансмиссия
-        mileage:''//пробег
+        mileage:'20000'//пробег
       }
     },
     watch: {
@@ -110,6 +110,36 @@ Vue.component('models-list', {
       onSelectGearBox:function(value){
         console.log('model-list->onSelectGearBox:', value);
         this.selectedGearBox = value;
+      },
+      //отправка POST запроса на сервер и получение от него цены и JSON
+      getPrice:function(){
+        //brand=Brilliance&model=M2 (BS4) I&year=2009&kmage=1000&engine=1.8 л&gearbox=механика
+        var s = 'brand='+(this.selectedBrand)+'&'+
+                  'model='+(this.model)+'&'+
+                    'year='+(this.selectedYear)+'&'+
+                      'kmage='+(this.mileage)+'&'+
+                        'engine='+(this.selectedEngine)+'&'+
+                          'gearbox='+(this.selectedGearBox);
+        console.log('postData:',s);
+         axios ({
+            method: 'post',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            url: 'https://uscar.ga/search',
+            data: s/*{
+              brand  : encodeURIComponent(this.selectedBrand),
+              model  : encodeURIComponent(this.model),
+              year   : encodeURIComponent(this.selectedYear),
+              kmage  : encodeURIComponent(this.mileage),
+              engine : encodeURIComponent(this.selectedEngine),
+              gearbox: encodeURIComponent(this.selectedGearBox)
+            }*/
+         })
+         .then (response=>{
+           console.log('model-list->getPrice:',response.data);
+         })
+         .catch (error =>{
+           console.log(error);
+         })
       }
     },
 
@@ -134,7 +164,7 @@ Vue.component('models-list', {
           <gearbox-selector v-bind:gearboxes = "gearboxes" v-on:select-gearbox="onSelectGearBox"></gearbox-selector>
           <label>Пробег</label>
           <input type="text" v-model="mileage"></br>
-          <button>Submit</button>
+          <button v-on:click ="getPrice">Submit</button>
         </div>
       </div>
     `
