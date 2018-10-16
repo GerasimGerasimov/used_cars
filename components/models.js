@@ -28,11 +28,11 @@ Vue.component('models-list', {
     },
     methods: {
       getBrandModels: function (brand) {
-          var url = "https://uscar.ga/data/get_models_for/"+brand;
+          var url = "https://uscar.ga/data/get_models_for="+brand;
           axios
             .get(url)
             .then(response => {
-              this.models = JSON.parse(response.data);
+              this.models = response.data;// JSON.parse(response.data);
               this.model  = 'Select a model...';
               this.models.splice(0,0,this.model);
               console.log(this.models);
@@ -49,13 +49,13 @@ Vue.component('models-list', {
           this.years = [];//смена модели, обнуляет список лет
           /* data/get_years_for/<brandname>&<modelname> */
           console.log('model-list->getYears:', this.model);
-          var url = "https://uscar.ga/data/get_years_for/"+
+          var url = "https://uscar.ga/data/get_years_for="+
                       this.selectedBrand+'&'+
                         this.model;
           axios
             .get(url)
             .then(response => {
-              this.years = JSON.parse(response.data);
+              this.years = response.data;//JSON.parse(response.data);
               console.log('model-list->getYears:', this.model,'->', this.years);
             })
             .catch(error => {
@@ -69,14 +69,14 @@ Vue.component('models-list', {
         this.selectedYear = value;
         //узнать доступные для брэнда/модели/года - доступные движки
         // /data/get_engines_for/<brandname>&<modelname>&<year>
-        var url = "https://uscar.ga/data/get_engines_for/"+
+        var url = "https://uscar.ga/data/get_engines_for="+
                       this.selectedBrand+'&'+
                         this.model+'&'+
                           this.selectedYear;
           axios
             .get(url)
             .then(response => {
-              this.engines = JSON.parse(response.data);
+              this.engines = response.data;//JSON.parse(response.data);
               console.log('model-list->getSelectYears:', this.model,'->', this.engines);
             })
             .catch(error => {
@@ -90,7 +90,7 @@ Vue.component('models-list', {
         this.selectedEngine = value;
         //узнать доступные для брэнда/модели/года/двигателя - доступные трансмиссии
         // /data/get_gearboxes_for/<brandname>&<modelname>&<year>&<engine>
-        var url = "https://uscar.ga/data/get_gearboxes_for/"+
+        var url = "https://uscar.ga/data/get_gearboxes_for="+
                       this.selectedBrand+'&'+
                         this.model+'&'+
                           this.selectedYear+'&'+
@@ -98,7 +98,7 @@ Vue.component('models-list', {
           axios
             .get(url)
             .then(response => {
-              this.gearboxes = JSON.parse(response.data);
+              this.gearboxes = response.data;//JSON.parse(response.data);
               console.log('model-list->getSelectYears:', this.model,'->', this.gearboxes);
             })
             .catch(error => {

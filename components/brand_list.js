@@ -29,10 +29,10 @@ Vue.component('brand-list', {
       axios
         .get(url)
         .then(response => {
-          this.brands = JSON.parse(response.data);
+          this.brands = response.data;//JSON.parse(response.data);
           this.selected  = 'Select a brand...';
           this.brands.splice(0,0,this.selected);
-          console.log(this.models);
+          console.log(this.brands);
         })
         .catch(error => {
           console.log(error);
