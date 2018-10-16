@@ -2,7 +2,7 @@
 Vue.component('brand-list', {
     data: function () {
       return {
-        brands: ['Select a brand...','Brilliance', 'Ford', 'Toyota','Mazda','BMW'],//массив заказов
+        brands: ['Select a brand...'],//массив заказов
         selected: 'Select a brand...',
         selectedBrand:''//выбранный брэнд минуя 'Select a brand...'
       }
@@ -23,6 +23,23 @@ Vue.component('brand-list', {
         return res;  
       }
     },    
+    created: function () {
+      console.log("brand-list->created");
+      var url = "https://uscar.ga/data/get_brands";
+      axios
+        .get(url)
+        .then(response => {
+          this.brands = JSON.parse(response.data);
+          this.selected  = 'Select a brand...';
+          this.brands.splice(0,0,this.selected);
+          console.log(this.models);
+        })
+        .catch(error => {
+          console.log(error);
+          this.selected  =  'Select a brand...';
+          this.brands    =  [this.selected];
+        })
+    },
     template: `
       <div>
         <select v-model="selected" v-on:change="getModels">

@@ -22,7 +22,7 @@ Vue.component('models-list', {
     },
     methods: {
       getBrandModels: function (brand) {
-          var url = "https://uscar.ga/brands/"+brand;
+          var url = "https://uscar.ga/data/get_models_for/"+brand;
           axios
             .get(url)
             .then(response => {

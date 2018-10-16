@@ -11,6 +11,14 @@ var app = new Vue({
 })
 
 /*
+* /data/get_brands
+        * /data/get_models_for/<brandname>
+        * /data/get_years_for/<brandname>&<modelname>
+        * /data/get_engines_for/<brandname>&<modelname>&<year>
+        * /data/get_gearboxes_for/<brandname>&<modelname>&<year>&<engine>
+
+*/
+/*
 
     <button v-on:click="getOrdersInfo">{{message}}</button>
   <div>
