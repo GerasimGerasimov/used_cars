@@ -25,13 +25,13 @@ Vue.component('engine-selector', {
     },   
     template: `
         <div>
-            <u>Engine:</u></br>
-            <template v-for="engine in engines">
-                <input type="radio"
-                  v-bind:value="engine"
-                    v-model="selectedEngine"
-                      v-on:change="onChange">
-                <label>{{engine}}</label><br>
+             <template v-for="engine in engines">
+                <label>{{engine}}
+                  <input type="radio"
+                    v-bind:value="engine"
+                      v-model="selectedEngine"
+                        v-on:change="onChange">                
+                </label><br>
             </template>
         </div>
     `

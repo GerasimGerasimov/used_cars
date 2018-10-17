@@ -26,13 +26,13 @@ Vue.component('gearbox-selector', {
     },   
     template: `
         <div>
-            <u>Gearbox:</u></br>
             <template v-for="gearbox in gearboxes">
-                <input type="radio"
-                  v-bind:value="gearbox"
-                    v-model="selectedGearBox"
-                      v-on:change="onChange">
-                <label>{{gearbox}}</label><br>
+                <label>{{gearbox}}
+                  <input type="radio"
+                    v-bind:value="gearbox"
+                      v-model="selectedGearBox"
+                        v-on:change="onChange">
+                </label><br>
             </template>
         </div>
     `

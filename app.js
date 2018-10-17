@@ -4,8 +4,12 @@ var app = new Vue({
     message: 'Оценка подержанных автомобилей',
   },
   template:`
-  <div>
-    <brand-list> </brand-list>
+  <div class="wrapper">
+    <div class="header">USEDCARS</div>
+    <div class="content">
+      <brand-list> </brand-list>
+    </div>
+    <div class="footer">2018 usedcar &#169</div>
   </div>
   `
 })

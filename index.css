@@ -1,48 +1,140 @@
+
+/*--------------------------------------------------------------
+CSS Reset
+--------------------------------------------------------------*/
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: auto;
+  -ms-text-size-adjust:     auto;
+}
+
+body {
+  margin: 0;
+}
+
+/* --- */
 *{
-  font-family: 'Helvetica', Arial, sans-serif;
+  font-family: sans-serif,'Helvetica', Arial;
   font-weight: normal;
 }
 
-.info {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  padding: 1px;
-  margin: 1px;
+/*расцветка блоков*/
+.wrapper {
+  background-color: white; /* Цвет фона веб-страницы */
 }
-.numbers {
-  /*position: relative;*/
-  word-wrap: normal;
-  max-width: 1.5%;
-  min-width: 1.5%;
-  background: lightgray;; /* фон для цифр (может быть как простой цветовой фон, так и красивая иконка) */
-  padding: 2px;
-  margin: 0px;
-  border-right: 1px solid gray;
+
+.header,
+.footer {
+  background-color: black; /* Цвет фона */
 }
-.max_prg {
-  position: relative;
+
+.content {
+  background-color: rgb(242, 245, 250);
 }
-.max_exp {
-  position: relative;
+
+/*размеры блоков*/
+.content {
+  padding: 5px;
 }
-.add_info {
+
+div,
+select,
+input[type="text"],
+button,
+label,
+template,
+u {
   width: 100%;
-  margin-left: 2px;
-  padding: 2px;
-  border-left: 1px solid gray;
-  border-right: 1px solid gray;
-  background-color:blanchedalmond;
+  margin-bottom: 5px;
 }
 
-.info:hover {
-  background: lightgray; /* Цвет фона под ссылкой */  
- } 
+.cost {
+  width: 100% !important;
+  margin-bottom: 5px;
+  border: 1px #FF9200;
+}
 
- li {
-  list-style-type: none; /* Убираем маркеры */
- }
- ul {
-  margin-left: 0; /* Отступ слева в браузере IE и Opera */
-  padding-left: 0; /* Отступ слева в браузере Firefox, Safari, Chrome */
- }
+/* шрифты блоков */
+.header {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+  color: #FF9200;
+}
+
+.footer {
+  text-transform: uppercase;
+  text-align: right;
+  font-size: 10px;
+  font-weight: lighter ;
+  color: #FF9200;
+}
+
+.cost {
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+  color: #FF9200;
+}
+
+select,
+input,
+button,
+label,
+u {
+  font-size: 24pt;
+  font-weight: bold;
+}
+
+/*выравнивание радиокнопок относительно текста */
+input[type="radio"] {
+  vertical-align: middle;
+}
+
+hr {
+  border: 0;
+  height: 2px;
+  background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+  background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+  background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+  background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+}
+
+/*GREED*/
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr repeat(2, minmax(auto, 15em)) 1fr;
+  grid-template-rows: 60px auto 16px;
+  height: 100vh;
+}
+
+.header {
+  grid-column: span 4;
+}
+
+.content {
+  grid-column: span 2/4;
+}
+
+.footer {
+  grid-column: span 4;
+}
+
+/*
+@media (max-width: 430px){
+  .header,
+  .content,
+  .footer {
+    grid-column: span 4;
+  }   
+}
+*/
+
+@media screen and (max-width: 640px){
+  .header,
+  .content,
+  .footer {
+    grid-column: span 4;
+  }   
+}

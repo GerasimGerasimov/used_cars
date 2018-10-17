@@ -13,15 +13,24 @@ Vue.component('models-list', {
         selectedEngine:'',//выбранный двигатель
         gearboxes:[],//типы трансмиссий
         selectedGearBox:'',//выбранная трансмиссия
-        mileage:'20000'//пробег
+        mileage:'5000',//пробег
+        Cost:'' //цена
       }
     },
     watch: {
       // эта функция запускается при любом изменении selectedBrand
       selectedBrand: function () {
         console.log('models-list->selectedBrand:',this.selectedBrand);
+        //при смене брэнда, все предыдущие записи очищаю
         this.model  =  'Select a model...';
         this.models = [this.model];
+        this.years = []; //года выпуска
+        this.selectedYear ='';//выбранный год
+        this.engines=[];//типы двигателей
+        this.selectedEngine='';//выбранный двигатель
+        this.gearboxe=[];//типы трансмиссий
+        this.selectedGearBox='';//выбранная трансмиссия
+        this.mileage='5000';//пробег
         if (this.selectedBrand !='')
           this.getBrandModels(this.selectedBrand);
       }
@@ -125,17 +134,12 @@ Vue.component('models-list', {
             method: 'post',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             url: 'https://uscar.ga/search',
-            data: s/*{
-              brand  : encodeURIComponent(this.selectedBrand),
-              model  : encodeURIComponent(this.model),
-              year   : encodeURIComponent(this.selectedYear),
-              kmage  : encodeURIComponent(this.mileage),
-              engine : encodeURIComponent(this.selectedEngine),
-              gearbox: encodeURIComponent(this.selectedGearBox)
-            }*/
+            data: s
          })
          .then (response=>{
            console.log('model-list->getPrice:',response.data);
+           var a = response.data;
+           this.Cost = a.avg_price;
          })
          .catch (error =>{
            console.log(error);
@@ -149,6 +153,11 @@ Vue.component('models-list', {
         var res = (this.model == 'Select a model...')? false: true;
         console.log('models-list->seen:',this.model,':',res);
         return res;  
+      },
+      seenAtferYear:function (){
+        var res = (this.selectedYear == '')? false: true;
+        console.log('models-list->seenAtferYear:',this.selectedYear,':',res);
+        return res;  
       }
     },
     template: `
@@ -160,11 +169,18 @@ Vue.component('models-list', {
         </select>
         <div v-show = "seen">
           <year-selector    v-bind:years     = "years"     v-on:select-year   ="onSelectYear"></year-selector>
-          <engine-selector  v-bind:engines   = "engines"   v-on:select-engine ="onSelectEngine"></engine-selector>
-          <gearbox-selector v-bind:gearboxes = "gearboxes" v-on:select-gearbox="onSelectGearBox"></gearbox-selector>
-          <label>Пробег</label>
-          <input type="text" v-model="mileage"></br>
-          <button v-on:click ="getPrice">Submit</button>
+          <div v-show = "seenAtferYear">
+            <hr>
+            <engine-selector  v-bind:engines   = "engines"   v-on:select-engine ="onSelectEngine"></engine-selector>
+            <hr>
+            <gearbox-selector v-bind:gearboxes = "gearboxes" v-on:select-gearbox="onSelectGearBox"></gearbox-selector>
+            <hr>
+            <label style="width:49%">Пробег</label>
+            <input style="width:49%" type="text" v-model="mileage"></br>
+            <hr>
+            <button v-on:click ="getPrice">Узнать цену</button>
+            <p class="cost">{{Cost}}</p>
+          </div>
         </div>
       </div>
     `
