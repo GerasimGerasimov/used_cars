@@ -5,11 +5,14 @@ var app = new Vue({
   },
   template:`
   <div class="wrapper">
-    <div class="header">USEDCARS</div>
+    <div class="header">
+      USEDCARS
+      <p class="header_info">on-line сервис оценки автомобилей с пробегом</p>
+    </div>
     <div class="content">
       <brand-list> </brand-list>
     </div>
-    <div class="footer">2018 usedcar &#169</div>
+    <div class="footer">2018 usedcars &#169</div>
   </div>
   `
 })

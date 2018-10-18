@@ -61,6 +61,15 @@ u {
   font-size: 50px;
   font-weight: bold;
   color: #FF9200;
+  background: linear-gradient(to top, #000000 0%, #456469 50%, #000000 100%);
+  text-shadow: lightgray 2px 2px 4px;
+}
+
+.header .header_info {
+  text-align: center;
+  font-size: 10px;
+  font-weight: bold;
+  text-shadow: none;
 }
 
 .footer {
@@ -92,6 +101,7 @@ input[type="radio"] {
   vertical-align: middle;
 }
 
+/* источник https://smagloiv.ru/blog/style_hr/ */
 hr {
   border: 0;
   height: 2px;
@@ -105,7 +115,7 @@ hr {
 .wrapper {
   display: grid;
   grid-template-columns: 1fr repeat(2, minmax(auto, 15em)) 1fr;
-  grid-template-rows: 60px auto 16px;
+  grid-template-rows: 90px auto 16px;
   height: 100vh;
 }
 
