@@ -37,6 +37,14 @@ Vue.component('models-list', {
     },
     methods: {
       getBrandModels: function (brand) {
+        if (DEBUG_MODE) {
+          console.log("models-list->getBrandModels->DEBUG_MODE");
+          this.models = getDebugModels (brand);
+          this.model  = 'Select a model...';
+          this.models.splice(0,0,this.model);
+          console.log(this.models);
+          return;
+        }
           var url = "https://uscar.ga/data/get_models_for="+brand;
           axios
             .get(url)
@@ -55,7 +63,13 @@ Vue.component('models-list', {
       
       //получить год выпуска модели
       getYears: function () {
-          this.years = [];//смена модели, обнуляет список лет
+        this.years = [];//смена модели, обнуляет список лет
+        if (DEBUG_MODE) {
+          console.log("models-list->getYears->DEBUG_MODE");
+          this.years = getDebugYears();
+          console.log(this.years);
+          return;
+        }
           /* data/get_years_for/<brandname>&<modelname> */
           console.log('model-list->getYears:', this.model);
           var url = "https://uscar.ga/data/get_years_for="+
@@ -74,8 +88,14 @@ Vue.component('models-list', {
         },
       //событие "выбран год выпуска модели"
       onSelectYear:function(value){
-        console.log('model-list->onSelectYear:', value);
         this.selectedYear = value;
+        if (DEBUG_MODE) {
+          console.log("models-list->onSelectYear->DEBUG_MODE");
+          this.engines = getDebugEngines();
+          console.log(this.engines);
+          return;
+        }
+        console.log('model-list->onSelectYear:', value);
         //узнать доступные для брэнда/модели/года - доступные движки
         // /data/get_engines_for/<brandname>&<modelname>&<year>
         var url = "https://uscar.ga/data/get_engines_for="+
@@ -97,6 +117,12 @@ Vue.component('models-list', {
       onSelectEngine:function(value){
         console.log('model-list->onSelectEngine:', value);
         this.selectedEngine = value;
+        if (DEBUG_MODE) {
+          console.log("models-list->onSelectEngine->DEBUG_MODE");
+          this.gearboxes = getDebugGearBoxes();
+          console.log(this.gearboxes);
+          return;
+        }
         //узнать доступные для брэнда/модели/года/двигателя - доступные трансмиссии
         // /data/get_gearboxes_for/<brandname>&<modelname>&<year>&<engine>
         var url = "https://uscar.ga/data/get_gearboxes_for="+
@@ -122,6 +148,12 @@ Vue.component('models-list', {
       },
       //отправка POST запроса на сервер и получение от него цены и JSON
       getPrice:function(){
+        if (DEBUG_MODE) {
+          console.log("models-list->getPrice->DEBUG_MODE");
+          this.Cost = getDebugPrice();
+          console.log(this.Cost);
+          return;
+        }
         //brand=Brilliance&model=M2 (BS4) I&year=2009&kmage=1000&engine=1.8 л&gearbox=механика
         var s = 'brand='+(this.selectedBrand)+'&'+
                   'model='+(this.model)+'&'+
