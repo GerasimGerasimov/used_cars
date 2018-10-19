@@ -25,6 +25,7 @@ Vue.component('engine-selector', {
     },   
     template: `
         <div>
+          <hr>
              <template v-for="engine in engines">
                 <label>{{engine}}
                   <input type="radio"

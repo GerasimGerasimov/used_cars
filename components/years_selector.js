@@ -22,9 +22,19 @@ Vue.component('year-selector', {
     },   
     template: `
         <select v-model="selectedYear" v-on:change="onChange">
+          <option v-for="year in years">
+            {{ year }}
+          </option>
+        </select>
+    `
+  })
+
+  /*
+        <select v-model="selectedYear" v-on:change="onChange">
+            
             <option v-for="year in years">
                 {{ year }}
             </option>
         </select>
     `
-  })
+  */

@@ -26,7 +26,8 @@ Vue.component('brand-list', {
     created: function () {
       if (DEBUG_MODE) {
         console.log("brand-list->created->DEBUG_MODE");
-        this.brands =DEBUG_BRANDS_LIST ;
+        this.brands = DEBUG_BRANDS_LIST ;
+        this.brands.sort();//сортировка брэндов
         this.selected  = 'Select a brand...';
         this.brands.splice(0,0,this.selected);
         console.log(this.brands);
@@ -39,6 +40,7 @@ Vue.component('brand-list', {
         .get(url)
         .then(response => {
           this.brands = response.data;//JSON.parse(response.data);
+          this.brands.sort();//сортировка брэндов
           this.selected  = 'Select a brand...';
           this.brands.splice(0,0,this.selected);
           console.log(this.brands);

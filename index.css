@@ -82,9 +82,16 @@ u {
 
 .cost {
   text-align: center;
-  font-size: 50px;
+  font-size: 48px;
   font-weight: bold;
   color: #FF9200;
+}
+
+.cost_error {
+  text-align: center;
+  font-size: 14px;
+  font-weight: normal;
+  color: orange;
 }
 
 select,
@@ -104,7 +111,7 @@ input[type="radio"] {
 /* источник https://smagloiv.ru/blog/style_hr/ */
 hr {
   border: 0;
-  height: 2px;
+  height: 3px;
   background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
   background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
   background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
