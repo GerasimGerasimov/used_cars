@@ -161,11 +161,11 @@ Vue.component('models-list', {
         }
         //узнать доступные для брэнда/модели/года/двигателя - доступные трансмиссии
         // /data/get_gearboxes_for/<brandname>&<modelname>&<year>&<engine>
-        var url = encodeURIComponent ("https://uscar.ga/data/get_gearboxes_for="+
+        var url = "https://uscar.ga/data/get_gearboxes_for="+
                       this.selectedBrand+'&'+
                         this.model+'&'+
                           this.selectedYear+'&'+
-                            this.selectedEngine);
+                            this.selectedEngine;
           axios
             .get(url)
             .then(response => {
