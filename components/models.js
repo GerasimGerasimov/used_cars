@@ -36,6 +36,7 @@ Vue.component('models-list', {
         this.gearboxes=[];//типы трансмиссий
         this.selectedGearBox='';//выбранная трансмиссия
         this.mileage='';//пробег
+        this.Cost = '';//цена
         if (this.selectedBrand !='')
           this.getBrandModels(this.selectedBrand);
       }
@@ -56,6 +57,7 @@ Vue.component('models-list', {
           this.selectedEngine='';//выбранный двигатель
           this.gearboxes=[];//типы трансмиссий
           this.selectedGearBox='';//выбранная трансмиссия
+          this.Cost = '';//цена
           //////////////////////////////////////////////
           return;
         }
@@ -85,6 +87,7 @@ Vue.component('models-list', {
         this.selectedEngine='';//выбранный двигатель
         this.gearboxes=[];//типы трансмиссий
         this.selectedGearBox='';//выбранная трансмиссия
+        this.Cost = '';//цена
         //////////////////////////////////////////////
         if (DEBUG_MODE) {
           console.log("models-list->getYears->DEBUG_MODE");
@@ -118,6 +121,7 @@ Vue.component('models-list', {
         this.selectedEngine='';//выбранный двигатель
         this.gearboxes=[];//типы трансмиссий
         this.selectedGearBox='';//выбранная трансмиссия
+        this.Cost = '';//цена
         //////////////////////////////////////////////
         if (DEBUG_MODE) {
           console.log("models-list->onSelectYear->DEBUG_MODE");
@@ -151,6 +155,7 @@ Vue.component('models-list', {
         this.selectedEngine = value;
          //почистить предыдущий выбор
          this.gearboxes=[];//типы трансмиссий
+         this.Cost = '';//цена
          //this.selectedGearBox='';//выбранная трансмиссия
         if (DEBUG_MODE) {
           console.log("models-list->onSelectEngine->DEBUG_MODE");
@@ -185,6 +190,8 @@ Vue.component('models-list', {
       },
       //отправка POST запроса на сервер и получение от него цены и JSON
       getPrice:function(){
+        //почистить предыдущий выбор
+        this.Cost = '';//цена
         if (DEBUG_MODE) {
           console.log("models-list->getPrice->DEBUG_MODE");
           this.Cost = getDebugPrice();
@@ -206,13 +213,16 @@ Vue.component('models-list', {
             data: s
          })
          .then (response=>{
-           console.log('model-list->getPrice:',response.data);
-           var a = response.data;
-           this.Cost = a.avg_price;
+            console.log('model-list->getPrice:',response.data);
+            var a = response.data;
+            if (a.hasOwnProperty ('avg_price'))
+              this.Cost = addPriceSpaces(a.avg_price);
+            else
+              this.Cost = app_data_cost_error();
          })
          .catch (error =>{
            console.log(error);
-           this.Cost = '';
+           this.Cost = "повторите запрос";
          })
       }
     },
@@ -239,11 +249,15 @@ Vue.component('models-list', {
         console.log('models-list->seenIfGearBoxSelected:',this.selectedGearBox,':',res);
         return res;  
       },
+      seenIfMileageSelected:function (){
+        var res = (this.mileage == '')? false: true;
+        console.log('models-list->seenIfMileageSelected',this.mileage,':',res);
+        return res;  
+      },
       //Изменения стилей
       //если в цене ошибка то показываю стиль cost-error
       isCostError: function (){
-        if (!isNumeric(this.Cost)) {
-          this.Cost = app_data_cost_error();
+        if (!isNumericSimple(this.Cost)) {
           return true;
         }
         return false;
@@ -269,8 +283,10 @@ Vue.component('models-list', {
                 <hr>
                 <input type="text" v-model="mileage" placeholder="Пробег"></br>
                 <hr>
-                <button v-on:click ="getPrice">Узнать цену</button>
-                <p class="cost" v-bind:class="{ cost_error : isCostError}" >{{Cost}}</p>
+                <div v-show = "seenIfMileageSelected">
+                  <button v-on:click ="getPrice">Узнать цену</button>
+                  <p class="cost" v-bind:class="{ cost_error : isCostError}" >{{Cost}}</p>
+                </div>              
               </div>
             </div>
           </div>
