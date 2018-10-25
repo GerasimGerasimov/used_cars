@@ -281,7 +281,7 @@ Vue.component('models-list', {
               </gearbox-selector>
               <div v-show = "seenIfGearBoxSelected">
                 <hr>
-                <input type="text" v-model="mileage" placeholder="Пробег"></br>
+                <input type="text" v-model="mileage" placeholder="Пробег" v-on:change ="getPrice"></br>
                 <hr>
                 <div v-show = "seenIfMileageSelected">
                   <button v-on:click ="getPrice">Узнать цену</button>
