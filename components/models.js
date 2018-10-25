@@ -294,22 +294,3 @@ Vue.component('models-list', {
       </div>
     `
   })
-  
-/*
-        <div v-show = "seen">
-          <year-selector    v-bind:years     = "years"     v-on:select-year   ="onSelectYear"></year-selector>
-          <div v-show = "seenAtferYear">
-            <hr>
-            <engine-selector  v-bind:engines   = "engines"   v-on:select-engine ="onSelectEngine"></engine-selector>
-            <hr>
-            <gearbox-selector v-bind:gearboxes = "gearboxes" v-on:select-gearbox="onSelectGearBox"></gearbox-selector>
-            <hr>
-            <label style="width:49%">Пробег</label>
-            <input style="width:49%" type="text" v-model="mileage"></br>
-            <hr>
-            <button v-on:click ="getPrice">Узнать цену</button>
-            <p class="cost">{{Cost}}</p>
-          </div>
-        </div>
-      </div>
-*/
